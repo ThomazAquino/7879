@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Gold',
         value: '£42.042',
-        colorClass: 'gray-500'
+        colorClass: 'gold'
       },
     ]
   }

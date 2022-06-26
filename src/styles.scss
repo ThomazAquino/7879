@@ -99,5 +99,24 @@
 /* This injects Tailwind's component classes and any component classes registered by plugins. */
 @tailwind components;
 
+/* Custom Font */
+@font-face {
+    font-family: 'RoobertTRIAL';
+    src: local('RoobertTRIAL'), url(assets/fonts/RoobertTRIAL-Regular.otf), url("assets/fonts/RoobertTRIAL-Regular.otf") format('otf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'RoobertTRIAL';
+    src: local('RoobertTRIAL'), url(assets/fonts/RoobertTRIAL-Medium.otf), url("assets/fonts/RoobertTRIAL-Medium.otf") format('otf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'RoobertTRIAL';
+    src: local('RoobertTRIAL'), url(assets/fonts/RoobertTRIAL-SemiBold.otf), url("assets/fonts/RoobertTRIAL-SemiBold.otf") format('otf');
+    font-weight: 600;
+}
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: RoobertTRIAL , sans-serif !important; }
