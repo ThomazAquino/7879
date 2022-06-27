@@ -2,17 +2,19 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BannerComponent } from './banner/banner.component';
 import { MaterialAssetComponent } from './material-asset/material-asset.component';
+import { PortfolioGraphComponent } from './portfolio-graph/portfolio-graph.component';
 
 
 
 @NgModule({
   declarations: [
     MaterialAssetComponent,
-    BannerComponent
+    BannerComponent,
+    PortfolioGraphComponent,
   ],
   imports: [
     CommonModule
   ],
-  exports: [MaterialAssetComponent, BannerComponent]
+  exports: [MaterialAssetComponent, BannerComponent, PortfolioGraphComponent]
 })
 export class SharedModule { }

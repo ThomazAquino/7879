@@ -1,0 +1,28 @@
+
+
+
+<div class="bg-[#326985] mb-52">
+  <div class="text-white px-12 py-12 flex justify-between border-b border-white flex-col sm:flex-row">
+    <span class="text-2xl">Your portfolio</span>
+    <div class="flex flex-col sm:items-end">
+      <span class="text-2xl">
+        £ {{ portfolio?.currentBalance.goldBalance * prices?.goldPrice +
+            portfolio?.currentBalance.platinumBalance * prices?.platinumPrice
+          }}
+      </span>
+      <span class="text-xs">
+        £123
+        123 123 
+      </span>
+    </div>
+  </div>
+  <div #chartEntry id="chart-entry"></div>
+</div>
+
+<pre>
+  {{ portfolio }}
+</pre>
+<br>
+<pre>
+  {{ prices }}
+</pre>
