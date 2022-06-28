@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AreaStyleOptions, ChartOptions, createChart, DeepPartial, IChartApi, ISeriesApi, SeriesOptionsCommon } from 'lightweight-charts';
-import { HerokuResponse, PortfolioService } from './portfolio.service';
-import { IPortfolio, RealTimePriceQuote } from './portfolio.types';
+import { PortfolioService } from './portfolio.service';
+import { HerokuResponse, IPortfolio, RealTimePriceQuote } from './portfolio.types';
 
 @Component({
   selector: 'app-portfolio-graph',
@@ -15,29 +15,20 @@ export class PortfolioGraphComponent implements OnInit, AfterViewInit {
   prices: RealTimePriceQuote;
   constructor(private _portfolioService: PortfolioService) { }
 
-  ngOnInit(): void {
-    this._portfolioService.getMetalStreamUrl();
-    this._portfolioService.XIgniteEvent.subscribe((prices: RealTimePriceQuote) => {
-      console.log('**** prices');
-      if (prices) {
-        this.prices = prices;
-      }
-    });
-
-    this._portfolioService.getPortfolio().subscribe((portfolio: HerokuResponse<IPortfolio>) => {
-      console.log('**** portfolio');
-
-      this.portfolio = portfolio.data.portfolio;
-      if (this.areaSeries) {
-        this.areaSeries.setData(this.getFormattedChartData(portfolio.data.portfolio));
-      }
-    })
-  }
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     this.setupAreaChart();
-    console.log('ngAfterViewInit prices', this.prices)
-    console.log('ngAfterViewInit portfolio', this.portfolio)
+
+    this._portfolioService.getPortfolio().subscribe((portfolio: HerokuResponse<IPortfolio>) => {
+      this.portfolio = portfolio.data.portfolio;
+      this.areaSeries.setData(this.getFormattedChartData(portfolio.data.portfolio));
+    })
+
+    this._portfolioService.getMetalStreamUrl();
+    this._portfolioService.XIgniteEvent.subscribe((prices: RealTimePriceQuote) => {
+      this.prices = prices;
+    });
   }
 
   setupAreaChart(): void {

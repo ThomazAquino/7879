@@ -1,3 +1,9 @@
+export interface HerokuResponse<T> {
+  data: {portfolio: T}
+  loading: boolean
+  networkStatus: number
+}
+
 export interface IItem {
   image: string;
   sku: string;

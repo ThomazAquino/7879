@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { applyPatch } from 'fast-json-patch';
 import gql from 'graphql-tag';
-import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
-import { IMetalSymbols, IPortfolio, IXIgnitePrice, RealTimePriceQuote, XIgniteEvent, XigniteMetalSymbols } from './portfolio.types';
+import { Observable, of, Subject, switchMap } from 'rxjs';
+import { HerokuResponse, IMetalSymbols, IPortfolio, IXIgnitePrice, RealTimePriceQuote, XIgniteEvent, XigniteMetalSymbols } from './portfolio.types';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class PortfolioService {
   basePath = `https://morning-dusk-57594.herokuapp.com`;
   realtimeData: IXIgnitePrice[] = [];
   lastUpdate: number = 0;
-  XIgniteEvent = new BehaviorSubject<RealTimePriceQuote>(null);
+  XIgniteEvent = new Subject<RealTimePriceQuote>();
   data: RealTimePriceQuote = {
     [IMetalSymbols.GOLD]: {
       diff: 0,
@@ -77,8 +77,8 @@ export class PortfolioService {
       );
 
 
-      // if (goldTimestampUpdate - this.lastUpdate >= 2000) {
-      if (true) {
+      if (goldTimestampUpdate - this.lastUpdate >= 2000) {
+      // if (true) {
         this.lastUpdate = goldTimestampUpdate;
         this.data = mapXIgniteToData(this.data, this.realtimeData);
         this.XIgniteEvent.next(this.data)
@@ -121,11 +121,7 @@ const STREAM_QUERY = gql`
   }
 `;
 
-export interface HerokuResponse<T> {
-  data: {portfolio: T}
-  loading: boolean
-  networkStatus: number
-}
+
 
 const findTimestampInPrices = (
   prices: IXIgnitePrice[],
