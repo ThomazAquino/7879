@@ -3,9 +3,9 @@ import { MaterialAsset } from '../shared/material-asset/material-asset.component
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html'
+  templateUrl: './navbar.component.html'
 })
-export class HeaderComponent implements OnInit {
+export class NavbarComponent implements OnInit {
   materialAssets: MaterialAsset[] = [];
 
   constructor() { }

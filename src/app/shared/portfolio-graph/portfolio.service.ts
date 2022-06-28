@@ -63,8 +63,6 @@ export class PortfolioService {
 
 
     eventSource.addEventListener("patch", (event) => {
-      console.log(JSON.parse((event as XIgniteEvent).data));
-
 
       this.realtimeData = applyPatch(
         this.realtimeData,
@@ -76,9 +74,7 @@ export class PortfolioService {
         XigniteMetalSymbols.GOLD
       );
 
-
       if (goldTimestampUpdate - this.lastUpdate >= 2000) {
-      // if (true) {
         this.lastUpdate = goldTimestampUpdate;
         this.data = mapXIgniteToData(this.data, this.realtimeData);
         this.XIgniteEvent.next(this.data)
